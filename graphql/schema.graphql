@@ -1,0 +1,20 @@
+type Profile {
+  id: ID!
+  name: String!
+  bio: String
+  cover_photo: String
+  profile_photo: String
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+type Query {
+  profiles: [Profile!]! @all
+  profile(id: ID! @eq): Profile @find
+}
+type Mutation {
+  createProfile(name: String!, bio: String, cover_photo: String, profile_photo: String): Profile!
+  @create(model: "App\\Models\\Profile")
+  updateProfile(id: ID!, name: String, bio: String, cover_photo: String, profile_photo: String): Profile
+  @update(model: "App\\Models\\Profile")
+  deleteProfile(id: ID!): Profile @delete(model: "App\\Models\\Profile")
+}
